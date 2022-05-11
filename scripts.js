@@ -206,7 +206,7 @@ virtual.innerHTML = `<div>
         <p>right</p>
     </div>
 </div>
-<textarea id="area" name="area" readonly="true"></textarea>
+<textarea id="area" name="area"></textarea> <!--  readonly="true" -->
 <p class="change_lang">change language: alt + shift</p>
 </div>`
 
@@ -214,30 +214,44 @@ virtual.innerHTML = `<div>
 document.body.prepend(form)
 form.prepend(virtual)
 
-kinput.onkeydown = kinput.onkeyup = kinput.onkeypress = handle;
+// kinput.onkeydown = kinput.onkeyup = kinput.onkeypress = handle;
+document.onkeydown = document.onkeyup = document.onkeypress = handle;
+document.onkeydown = addActive;
+document.onkeyup = removeActive;
 
 let lastTime = Date.now();
-
-function handle(e) {
+function addActive (e) {
     let currentBtn = document.querySelector('.' + e.code);
+    currentBtn.classList.add('active');
+    // console.log(currentBtn);
+}
+function removeActive (e) {
+    let currentBtn = document.querySelector('.' + e.code);
+    currentBtn.classList.remove('active');
+    // console.log(currentBtn);
+}
+function handle(e) {
+  let text = e.key;
+  let currentBtn = document.querySelector('.' + e.code);
     console.log(currentBtn);
-  let text = e.type +
-    ' key=' + e.key +
-    ' code=' + e.code +
-    (e.shiftKey ? ' shiftKey' : '') +
-    (e.ctrlKey ? ' ctrlKey' : '') +
-    (e.altKey ? ' altKey' : '') +
-    (e.metaKey ? ' metaKey' : '') +
-    (e.repeat ? ' (repeat)' : '') +
-    "\n";
+//   let text = e.type +
+//     ' key=' + e.key +
+//     ' code=' + e.code +
+//     (e.shiftKey ? ' shiftKey' : '') +
+//     (e.ctrlKey ? ' ctrlKey' : '') +
+//     (e.altKey ? ' altKey' : '') +
+//     (e.metaKey ? ' metaKey' : '') +
+//     (e.repeat ? ' (repeat)' : '') +
+//     "\n";
 
-  if (area.value && Date.now() - lastTime > 250) {
-    area.value += new Array(81).join('-') + '\n';
-  }
-  lastTime = Date.now();
+//   if (area.value && Date.now() - lastTime > 250) {
+//     area.value += new Array(81).join('-') + '\n';
+//   }
+//   lastTime = Date.now();
 
   area.value += text;
+
 }
 
 
-alert('Привет! Дай мне, пожалуйста, ещё немного времени (всё доделаю до дедлайна кросс-чека), давай будем на связи - напиши мне в дискорд Ph0enixT1m3#7647 , или в телеграм https://t.me/Zhdan_D_ke , у меня из-за работы не хватило времени :) Спасибо за понимание! ')
+// alert('Привет! Дай мне, пожалуйста, ещё немного времени (всё доделаю до дедлайна кросс-чека), давай будем на связи - напиши мне в дискорд Ph0enixT1m3#7647 , или в телеграм https://t.me/Zhdan_D_ke , у меня из-за работы не хватило времени :) Спасибо за понимание! ')
